@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+#/ Usage: ./diagnostics2json < diagnostics.txt
+#/
+#/ Convert diagnostics.txt to JSON format.
+#/
+#/ Example:
+#/   $ ./diagnostics2json < diagnostics.txt | jq -r '." RELEASE"'
+#/   ====================================
+#/    RELEASE
+#/   ====================================
+#/   RELEASE_VERSION="3.8.8"
+#/   RELEASE_PLATFORM="ami"
+#/
+#/   RELEASE_BUILD_ID="69832e070d"
+#/   RELEASE_BUILD_DATE="2023-08-06T01:15:57Z"
+#/
+require "optparse"
+require "json"
+
+def usage
+  exec "grep '^#/' < \"#{$0}\" | cut -c4-"
+end
+
+opt = OptionParser.new
+opt.on("-h", "--help") { usage() }
+opt.parse!
+
+heading = ""
+sections = {}
+
+lines = ARGF.readlines
+
+0.upto(lines.size-3) do |i|
+  if (lines[i].match?(/^=+$/) && lines[i+2].match?(/^=+$/)) || (lines[i].match?(/^$/) && lines[i+2].match?(/^-+$/))
+    heading = lines[i+1].chomp
+    sections[heading] = ""
+  end
+  sections[heading] << lines[i]
+end
+
+puts sections.to_json
