@@ -21,8 +21,7 @@ RELEASE_BUILD_DATE="2023-08-06T01:15:57Z"
 ### Filter by section content
 
 ``` sh
-$ ./diagnostics2json < diagnostics.txt | jq -r 'values[] | select(. | contains("8ae1be3e-7685-11ee-8ae2-06d8c9275659"))' |
-tail
+$ ./diagnostics2json < diagnostics.txt | jq -r 'values[] | select(. | contains("8ae1be3e-7685-11ee-8ae2-06d8c9275659"))' | tail
 
 ====================================
  STORAGE REPLICATION
