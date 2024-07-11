@@ -32,7 +32,7 @@ lines = ARGF.readlines
 
 0.upto(lines.size-3) do |i|
   if (lines[i].match?(/^=+$/) && lines[i+2].match?(/^=+$/)) || (lines[i].match?(/^$/) && lines[i+2].match?(/^-+$/))
-    heading = lines[i+1].chomp
+    heading = lines[i+1].chomp.strip
     sections[heading] = ""
   end
   sections[heading] << lines[i]
