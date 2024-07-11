@@ -2,6 +2,12 @@
 
 Convert GitHub Enterprise Server [diagnostic files](https://docs.github.com/en/enterprise-server@latest/support/contacting-github-support/providing-data-to-github-support#creating-and-sharing-diagnostic-files) to JSON format.
 
+## Installation
+
+```
+curl -O https://raw.githubusercontent.com/kyanny/diagnostics2json/main/diagnostics2json && chmod +x diagnostics2json
+```
+
 ## Examples
 
 ### Filter by section header
